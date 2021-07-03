@@ -1,0 +1,107 @@
+<div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+  <div class="card card0 border-0">
+      <div class="row d-flex">
+          <div class="col-lg-6">
+              <div class="card1 pb-5">
+                  <div class="row"> <img src="../../../assets/logo.jpg" class="logo"> </div>
+                  <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img width="100%" src="../../../assets/3.jpg" class="image"> </div>
+
+              </div>
+          </div>
+          <div class="col-lg-6">
+
+              <div class="card2 card border-0 px-4 py-5">
+                <form class="needs-validation" [formGroup]="form" novalidate>
+                <div class="row px-3"> <label class="mb-1">
+                  <h6 class="mb-0 text-sm">{{'Table Number'|translate}} </h6>
+                  </label>
+                  <select class="form-control" formControlName="tableId"   name="tableId"  >
+                    <option disabled value=""> {{'Select Table'|translate}} </option>
+
+                    <option   *ngFor="let t of tables" value="{{t.id}}">{{t.tableNumber}}</option>
+
+                  </select>
+               </div>
+               <div  class="row px-3" *ngIf="form.controls['tableId'].invalid && (form.controls['tableId'].dirty || form.controls['tableId'].touched)" class="text-danger">
+                <div *ngIf="form.controls['tableId'].errors?.required">
+                {{'table number is required'|translate}}
+              </div>
+            </div>
+               <br/>
+                <div class="row px-3"> <label class="mb-1">
+                  <h6 class="mb-0 text-sm">{{'number Of peoples'|translate}} </h6>
+                  </label> <input class="mb-4" type="number" name="numberOfpeoples"  formControlName="numberOfpeoples"  placeholder="{{'Enter number of people'|translate}}" >
+               </div>
+
+               <div  class="row px-3" *ngIf="form.controls['numberOfpeoples'].invalid && (form.controls['numberOfpeoples'].dirty || form.controls['numberOfpeoples'].touched)" class="text-danger">
+                <div *ngIf="form.controls['numberOfpeoples'].errors?.required">
+                {{'number Of People is required'|translate}}
+              </div>
+            </div>
+
+
+
+            <div class="row" *ngFor="let item of foods.controls; let i = index">
+
+              <div style="margin-left:10px;" class="row" formArrayName="reservationFoods">
+                <div class="row" [formGroupName]="i">
+                <div class="col-md-4">
+                 <div class="row px-3"> <label class="mb-1">
+                   <h6 class="mb-0 text-sm">{{'Food Type'|translate}} </h6>
+                   </label>
+                   <select class="form-control" formControlName="foodTypeId"   name="foodTypeId"  >
+                     <option disabled value=""> {{'Select FoodType'|translate}}</option>
+
+                     <option   *ngFor="let f of foodTypes" value="{{f.id}}">{{f.foodName}}</option>
+
+                   </select>
+                   <div  class="row px-3" *ngIf="foods.controls[i].get('foodTypeId')?.invalid && (foods.controls[i].get('foodTypeId')?.dirty || foods.controls[i].get('foodTypeId')?.touched)" class="text-danger">
+                     <div *ngIf="foods.controls[i].get('foodTypeId')?.errors?.required">
+                     {{'Food Type is required'|translate}}
+                   </div>
+                 </div>
+                </div>
+                </div>
+                <div class="col-md-4">
+                 <div class="row px-3"> <label class="mb-1">
+                   <h6 class="mb-0 text-sm">{{'Quantity'|translate}}</h6>
+                   </label> <input class="mb-4" type="number" name="quantity" formControlName="quantity"  placeholder="{{'Enter Quantity'|translate}}" >
+                   <div  class="row px-3" *ngIf="foods.controls[i].get('quantity')?.invalid && (foods.controls[i].get('quantity')?.dirty || foods.controls[i].get('quantity')?.touched)" class="text-danger">
+                     <div *ngIf="foods.controls[i].get('quantity')?.errors?.required">
+                      {{'Quantity is required'|translate}}
+                   </div>
+                 </div>
+               </div>
+
+                </div>
+
+                 <div class="col-md-4 px-3" >
+                     <button *ngIf="i == foods.controls.length - 1" (click)="addFood()">+ {{'Add'|translate}}</button>
+                     <button *ngIf="i != foods.controls.length - 1" (click)="deletefood(i)">- {{'Remove'|translate}}</button>
+                 </div>
+
+                </div>
+              </div>
+
+             </div>
+
+                  <div class="row px-3"> <label class="mb-1">
+                      <h6 class="mb-0 text-sm">{{'notes'|translate}}</h6>
+                      </label> <input class="mb-4" type="text" name="notes" formControlName="notes"  placeholder="{{'Enter notes'|translate}}" autocomplete="false">
+                  </div>
+
+
+
+
+
+                   <br/>
+                  <div class="row mb-3 px-3"> <button [disabled]="!form.valid" type="button" (click)="Reserve()" class="btn btn-success text-center">{{'Reserve'|translate}} </button> </div>
+
+                </form>
+              </div>
+          </div>
+      </div>
+
+  </div>
+</div>
+

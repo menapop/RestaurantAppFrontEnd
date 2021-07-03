@@ -1,0 +1,50 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" [routerLink]="['/home']">
+    <img src='../../../assets/logo.jpg' width="40px"/>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+       <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active-link" >{{'Home'| translate}} </a>
+      </li>
+      <li class="nav-item active" *ngIf="!islogin">
+        <a class="nav-link" [routerLink]="['/Login']" routerLinkActive="active-link" >{{'Login'| translate}}</a>
+      </li>
+      <li class="nav-item active" *ngIf="islogin && roleId==2">
+        <a class="nav-link" [routerLink]="['/reserve']" routerLinkActive="active-link">{{'Reserve'| translate}}</a>
+      </li>
+
+      <li class="nav-item active" *ngIf="islogin && roleId==1">
+        <a class="nav-link" [routerLink]="['/reservations']" routerLinkActive="active-link">{{'Reservations'| translate}}</a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li> -->
+
+
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+      <ul class="navbar-nav">
+           <li class="nav-item btn-rotate" ngbDropdown placement="bottom-left">
+          <a *ngIf="translate.currentLang=='ar'" (click)="ToEnglish()" class="nav-link">
+            English
+          </a>
+          <a *ngIf="translate.currentLang=='en'" (click)="ToArabic()" class="nav-link">
+            عربي
+          </a>
+        </li>
+
+        <li class="nav-item active" *ngIf="islogin">
+          <a style="cursor: pointer;" (click)="logout()" >{{'LogOut' | translate}}</a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+<!-- Navbar -->
